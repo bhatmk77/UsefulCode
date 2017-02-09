@@ -27,14 +27,21 @@ enum AppStoryboard: String {
 	var instance: NSStoryboard {
 		return NSStoryboard(name: self.rawValue, bundle: Bundle.main)
 	}
-
 	
 	
-	func viewController<T: NSViewController>(viewControllerClass: T.Type) -> T {
+	
+	func viewController<T : NSViewController>(viewControllerClass : T.Type,
+	                    function : String = #function,
+	                    line : Int = #line,
+	                    file : String = #file) -> T {
 		let storyboardID = (viewControllerClass as NSViewController.Type).storyboardID
-		return instance.instantiateController(withIdentifier: storyboardID) as! T
+		guard let scene = instance.instantiateController(withIdentifier: storyboardID) as? T else {
+			fatalError("ViewController with identifier \(storyboardID), not found in \(self.rawValue) Storyboard.\nFile : \(file) \nLine Number : \(line) \nFunction : \(function)")
+		}
+		
+		return scene
 	}
-
+	
 	
 	
 	func initialViewController() -> NSViewController? {
@@ -55,7 +62,7 @@ extension NSViewController {
 	//	let tempVC = ViewController.instantiate(fromAppStoryboard: .Main)
 	//	let tempVC = AppStoryboard.PreLogin.viewController(viewControllerClass: LoginVC.self)
 	//	let tempVC = AppStoryboard.PreLogin.instance.instantiateViewController(withIdentifier: LoginVC.storyboardID)
-
+	
 	static func instantiate(fromAppStoryboard appStoryboard: AppStoryboard) -> Self {
 		return appStoryboard.viewController(viewControllerClass: self)
 	}
