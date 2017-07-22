@@ -1,5 +1,5 @@
 //
-//  AppStoryboard.swift
+//  SwiftCodeSnippets.swift
 //  <Your Project Name Here…>
 //
 //  Created by Murali Kishan Bhat on 2/9/17.
