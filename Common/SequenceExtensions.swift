@@ -6,7 +6,7 @@
 //  Copyright © 2017 EXILANT. All rights reserved.
 //
 
-/* Swift sequence extensions
+/* Swift Sequence Extensions
 
 # Swift Sequence Extensions
 
